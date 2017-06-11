@@ -22,17 +22,17 @@ npm install
 npm start
 ```
 
-5. Open a test page in your browser: [http://localhost:8080/test-resources/ui5lab/geometry/Square.html](http://localhost:8080/test-resources/ui5lab/geometry/Square.html)
+5. Open a test page in your browser: [http://localhost:8080/test-resources/nabi/m/PDFViewer.html](http://localhost:8080/test-resources/nabi/m/PDFViewer.html)
 
 ### Directions
 
 [Browser](http://localhost:8080/test-resources/ui5lab/browser/index.html) A sample browser showcasing artifacts from one or more libraries
 
-[Control page](http://localhost:8080/test-resources/ui5lab/geometry/Square.html) An HTML test page instantiating the control
+[Control page](http://localhost:8080/test-resources/nabi/m/PDFViewer.html) An HTML test page instantiating the control
 
-[Test page](http://localhost:8080/test-resources/ui5lab/geometry/qunit/Square.qunit.html) A simple QUnit test
+[Test page](http://localhost:8080/test-resources/nabi/m/qunit/PDFViewer.qunit.html) A simple QUnit test
 
-[Testuite](http://localhost:8080/test-resources/ui5lab/geometry/qunit/testsuite.qunit.html) A QUnit testsuite running all unit tests in this library
+[Testuite](http://localhost:8080/test-resources/nabi/m/qunit/testsuite.qunit.html) A QUnit testsuite running all unit tests in this library
 
 ### Contributing
 
