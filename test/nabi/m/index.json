@@ -1,6 +1,6 @@
 {
 	"nabi.m": {
-		"icon": "sap-icon://database",
+		"icon": "sap-icon://pdf-reader",
 		"name": "Nabi Mobile",
 		"description": "Nabi mobile controls",
 		"source" : "https://github.com/nzamani/ui5-nabi-m",
