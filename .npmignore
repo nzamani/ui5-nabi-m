@@ -1,4 +1,6 @@
 # exclude development artifacts
+src
+test
 node_modules
 bower_components
 .idea
