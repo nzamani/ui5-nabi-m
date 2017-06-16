@@ -1,10 +1,11 @@
 {
 	"nabi.m": {
-		"icon": "sap-icon://database",
+		"icon": "sap-icon://pdf-reader",
 		"name": "Nabi Mobile",
 		"description": "Nabi mobile controls",
 		"source" : "https://github.com/nzamani/ui5-nabi-m",
 		"documentation": "https://github.com/nzamani/ui5-nabi-m/README.md",
+		"license": "Apache 2.0",
 		"version": 1.0,
 		"content": {
 			"PDFViewer": {
