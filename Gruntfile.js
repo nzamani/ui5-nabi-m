@@ -92,11 +92,10 @@ module.exports = function(grunt) {
 			}
 		},
 
-		//TODO make sure thirdparty folder does not get into preload
 		openui5_preload: {
 			library: {
 				options: {
-					resources: ['<%= dir.src %>'],
+					resources: '<%= dir.src %>',
 					dest: '<%= dir.dist %>/resources'
 				},
 				libraries: true
