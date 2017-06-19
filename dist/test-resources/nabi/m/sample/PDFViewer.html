@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html style="height:100%;"> <!-- TODO -->
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="UTF-8">
+
+	<title>Sample - nabi.m.PDFViewer</title>
+
+	<base href="../../../../">
+	<!--[if lte IE 9]><script>
+	(function() {
+		var baseTag = document.getElementsByTagName('base')[0];
+		baseTag.href = baseTag.href;
+	})();
+	</script><![endif]-->
+
+	<script id="sap-ui-bootstrap"
+		src="resources/sap-ui-core.js"
+		data-sap-ui-libs="sap.m,nabi.m"
+		data-sap-ui-theme="sap_belize">
+	</script>
+
+	<script>
+		sap.ui.getCore().attachInit(function () {
+			var sThirdPartyPath = "/" + jQuery.sap.getModulePath("nabi.m.thirdparty");;
+			var sPdfUri = sThirdPartyPath + "/pdfjs/web/compressed.tracemonkey-pldi-09.pdf";
+
+			var oModel = new sap.ui.model.json.JSONModel({
+				pdfUri: sPdfUri
+			});
+			sap.ui.getCore().setModel(oModel);
+
+			var oPdfViewer = new nabi.m.PDFViewer({
+				source: "{/pdfUri}"
+			});
+			oPdfViewer.placeAt("content");
+
+		});
+	</script>
+</head>
+<body id="content" class="sapUiBody">
+</body>
+</html>
