@@ -98,7 +98,14 @@ module.exports = function(grunt) {
 					resources: '<%= dir.src %>',
 					dest: '<%= dir.dist %>/resources'
 				},
-				libraries: true
+				libraries: {
+					'nabi/m': {
+						src : [
+							'nabi/m/**',
+							'!nabi/m/thirdparty/**'
+						]
+					}
+				}
 			}
 		},
 
