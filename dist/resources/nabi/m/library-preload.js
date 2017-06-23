@@ -1,9 +1,0 @@
-jQuery.sap.registerPreloadedModules({
-	"version": "2.0",
-	"name": "nabi.m.library-preload",
-	"modules": {
-		"nabi/m/library.js": "/*!\n * ${copyright}\n */\nsap.ui.define([\"jquery.sap.global\",\"sap/ui/core/library\"],function(e,i){\"use strict\";return sap.ui.getCore().initLibrary({name:\"nabi.m\",dependencies:[\"sap.ui.core\"],types:[],interfaces:[],controls:[\"nabi.m.PDFViewer\"],elements:[],noLibraryCSS:!1,version:\"${version}\"}),nabi.m});",
-		"nabi/m/PDFViewer.js": "/*!\n * ${copyright}\n */\nsap.ui.define([\"jquery.sap.global\",\"./library\",\"sap/ui/core/Control\"],function(t,e,i){\"use strict\";var r=i.extend(\"nabi.m.PDFViewer\",{metadata:{library:\"nabi.m\",properties:{height:{type:\"sap.ui.core.CSSSize\",group:\"Dimension\",defaultValue:\"100%\"},width:{type:\"sap.ui.core.CSSSize\",group:\"Dimension\",defaultValue:\"100%\"},source:{type:\"sap.ui.core.URI\",group:\"Misc\",defaultValue:null}},aggregations:{},events:{}},init:function(){}});return r.prototype.setWidth=function(t){this.setProperty(\"width\",t,!0);var e=this.$();return e&&e.attr(\"width\",t),this},r.prototype.setHeight=function(t){this.setProperty(\"height\",t,!0);var e=this.$();return e&&e.attr(\"height\",t),this},r});",
-		"nabi/m/PDFViewerRenderer.js": "/*!\n * ${copyright}\n */\nsap.ui.define([\"jquery.sap.global\"],function(t){\"use strict\";var e,i;i=t.sap.getModulePath(\"nabi.m.thirdparty\"),e=i+\"/pdfjs/web/viewer.html\";var r={};return r.render=function(t,i){t.write(\"<iframe\"),t.writeControlData(i),t.addClass(\"nabiMPDFViewer\"),t.writeClasses(),t.writeAttribute(\"src\",e+\"?file=\"+i.getSource()),t.writeAttribute(\"height\",i.getHeight()),t.writeAttribute(\"width\",i.getWidth()),t.write(\"></iframe>\")},r},!0);"
-	}
-});
