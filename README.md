@@ -2,6 +2,8 @@
 
 UI5 Nabi Mobile - a few things we would love to share with the community.
 
+[![NPM](https://nodei.co/npm/ui5-nabi-m.png?compact=true)](https://npmjs.org/package/ui5-nabi-m)
+
 ## Getting started
 
 1. Install node.js (get it from [nodejs.org](http://nodejs.org/)).
