@@ -24,8 +24,9 @@
 
 		<script>
 			sap.ui.getCore().attachInit(function () {
-				var sThirdPartyPath = "/" + jQuery.sap.getModulePath("nabi.m.thirdparty");;
-				var sPdfUri = sThirdPartyPath + "/pdfjs/web/compressed.tracemonkey-pldi-09.pdf";
+
+				var sPdfUri = "compressed.tracemonkey-pldi-09.pdf";
+
 				var oPdfViewer = new nabi.m.PDFViewer({
 					source: sPdfUri
 				});
