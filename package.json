@@ -1,7 +1,7 @@
 {
   "name": "ui5-nabi-m",
   "version": "0.1.0",
-  "description": "UI5 Nabi Mobile",
+  "description": "UI5 Nabi Mobile - a library for (SAP|Open)UI5",
   "repository" : {
       "type" : "git",
       "url" : "https://github.com/nzamani/ui5-nabi-m.git"
