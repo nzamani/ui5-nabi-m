@@ -223,11 +223,78 @@ sap.ui.define([
 	// Override Parent APIs
 	//##############################################################
 
+	/**
+	 * FIXME This will work if the following pull request get merged: https://github.com/SAP/openui5/pull/1623
+	 *
+	 * Take the files received and scale the images. THe scaled images will then be used for upload.
+	 *
+	 * This is a default implementation of the interface </code>sap.ui.unified.IUploadableBlobs</code>.
+	 *
+	 * @override
+	 * @param {Blob[]} aBlobs The initial Blobs which can be used to determine/calculate a new array of Blobs for further processing.
+	 * @return {Promise} A Promise that resolves with an array of Blobs which is used for the final uploading.
+	 */
+	ImageFileUploader.prototype.getProcessedBlobsFromArray = function (aBlobs){
+		return new Promise(function(resolve, reject){
+
+			this._scaleFiles(aBlobs).then(function(aScaledFiles){
+				var i, oBlob, aFilesToUpload, iMaxScaledFileSize;
+				jQuery.sap.log.debug("Images scaled successfully, now start upload...");
+
+				// chek the file sizes + convert to window.File if possible
+				aFilesToUpload = [];
+				for (i=0; i<aScaledFiles.length;i++){
+					oBlob = aScaledFiles[i];
+					// check the max allowed file size
+					iMaxScaledFileSize = this.getMaximumScaledFileSize();
+					if (iMaxScaledFileSize > 0 && oBlob.size > iMaxScaledFileSize) {
+						jQuery.sap.log.info("File: " + oBlob.name + " is of size " + oBlob.size + " bytes which exceeds the file size limit of " + this.getMaximumScaledFileSize() + " bytes.");
+						this.fireMaxScaledFileSizeExceed({
+							fileName:oBlob.name,
+							fileSize:oBlob.size
+						});
+						reject({
+							reason: "MaxScaledFileSizeExceed",
+							fileName:oBlob.name,
+							fileSize:oBlob.size
+						});
+						return;
+					}
+
+					// maybe we should remove this here
+					if (!Device.browser.msie && !Device.browser.edge) {
+						// use instances of window.File for image files instead of Blob
+						if ( !(oBlob instanceof window.File) ) {
+							aFilesToUpload.push( new File([oBlob], oBlob.name, {type: oBlob.type}) );
+						} else {
+							aFilesToUpload.push(oBlob);
+						}
+					} else {
+						aFilesToUpload.push(oBlob);
+					}
+				}
+
+				resolve(aFilesToUpload);
+
+			}.bind(this)).catch(function(){
+				var sMsg = "File upload failed because on or more files could not be scaled!";
+				jQuery.sap.log.error(sMsg);
+				reject({
+					reason: "ImageScalingFailed",
+					message: sMsg,
+					args: arguments
+				});
+			});
+
+		}.bind(this));
+	};
+
 	ImageFileUploader.prototype.setSendXHR = function() {
 		throw new Error("ImageFileUploader only supports upload via XHR requests (sendXHR is always true). Thus, the setter is obsolete.");
 	};
 
 	/**
+	 * FIXME This can be removed if the following pull request get merged: https://github.com/SAP/openui5/pull/1623
 	 * Starts the upload (as defined by uploadUrl).
 	 * @type {void}
 	 * @public
