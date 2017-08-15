@@ -297,3 +297,13 @@ oImageFileUploader.placeAt("content");
 ```
 
 
+## Missing Features, ToDos and Ideas
+
+I can’t tell if and when these features will be implemented. I’ll wait for feedback first, because I don’t want to fall into the “ultimate waste” trap, which is "Doing something nobody wants/needs" (Eric Ries).
+
+Here is I'm currently thinking of so far:
+
+- Use public APIs of `sap.ui.unified.FileUploader` (see pull request mentioned above)
+- Introduce algorithm that allows to scale to a given max file size, i.e. if file should have a max of 1 MB then the image should be scaled down to that maximum file size
+- Introduce additional `scaleType` “FactorBeforeBoundary” and “BoundaryBeforeFactor” in order to allow scaling via both options sequencially
+- Allow custom down sampling algorithms
