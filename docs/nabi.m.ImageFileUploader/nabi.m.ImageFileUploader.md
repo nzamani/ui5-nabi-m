@@ -16,7 +16,7 @@ The magic happens behind the scenes with plain old JavaScript / HTML5. However, 
 
 What about the image quality?
 -----------------------------
-Using HTML5 Canvas for scaling images down (“down sampling”) comes in pretty handy for us as we don’t have to deal with all the [math](https://en.wikipedia.org/wiki/Image_scaling#Mathematical); instead we let the browser handle the process of down sampling for us. Down sampling means “decreasing the pixel number (scaling down), and this usually results in a visible quality loss” [Wikipedia](https://en.wikipedia.org/wiki/Image_scaling). Using HTML5 Canvas might not always be the best option in terms of quality. However, it might be enough for lots use cases. In future, I might introduce an API allowing you to use something different than HTML5 Canvas, i.e. your own down sampling algorithm [Wikipedia](https://en.wikipedia.org/wiki/Image_scaling#Algorithms).
+Using HTML5 Canvas for scaling images down (“down sampling”) comes in pretty handy for us as we don’t have to deal with all the [math](https://en.wikipedia.org/wiki/Image_scaling#Mathematical); instead we let the browser handle the process of down sampling for us. Down sampling means “decreasing the pixel number (scaling down), and this usually results in a visible quality loss” ([Wikipedia](https://en.wikipedia.org/wiki/Image_scaling)). Using HTML5 Canvas might not always be the best option in terms of quality. However, it might be enough for lots use cases. In future, I might introduce an API allowing you to use something different than HTML5 Canvas, i.e. your own down sampling algorithm ([Wikipedia](https://en.wikipedia.org/wiki/Image_scaling#Algorithms)).
 
 ## Examples
 
