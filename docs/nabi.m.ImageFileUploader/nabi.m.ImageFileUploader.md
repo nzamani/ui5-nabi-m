@@ -145,7 +145,7 @@ oImageFileUploader.placeAt("content");
 
 ### 5. Using Scale Condition "Boundary"
 
-Using the `scaleCondition` `nabi.m.ImageScaleCondition.Boundary` allows you to only scale down images in case their initial resolution (width x height) exceeds a certain width or height. If that’s the case the images gets scaled down based of the scaleType (in the example `nabi.m.ImageScaleType.Boundary` below). The default for scaleCondition is `nabi.m.ImageScaleCondition.None`, which means always scale images without checking any condition.
+Using the `scaleCondition` `nabi.m.ImageScaleCondition.Boundary` allows you to only scale down images in case their initial resolution (width x height) exceeds a certain width or height. If that’s the case the images gets scaled down based of the `scaleTypen` (in the example `nabi.m.ImageScaleType.Boundary` below). The default for `scaleCondition` is `nabi.m.ImageScaleCondition.None`, which means always scale images without checking any condition.
 
 ```js
 var oImageFileUploader = new nabi.m.ImageFileUploader({
@@ -183,7 +183,7 @@ oImageFileUploader.placeAt("content");
 
 ### 6. Using Scale Condition "Resolution"
 
-Using the `scaleCondition` `nabi.m.ImageScaleCondition.Resolution` allows you specify a max resolution of the initial image. If that resolution is exceeded the scaling kicks in – again based on the scaledType.
+Using the `scaleCondition` `nabi.m.ImageScaleCondition.Resolution` allows you specify a max resolution of the initial image. If that resolution is exceeded the scaling kicks in – again based on the `scaledType`.
 
 ```js
 var oImageFileUploader = new nabi.m.ImageFileUploader({
