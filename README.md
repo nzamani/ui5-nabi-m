@@ -24,22 +24,25 @@ npm install
 npm start
 ```
 
-5. Open a test page in your browser: [http://localhost:8080/test-resources/nabi/m/PDFViewer.html](http://localhost:8080/test-resources/nabi/m/PDFViewer.html)
+5. Open a test page in your browser:
+- [http://localhost:8080/test-resources/nabi/m/PDFViewer.html](http://localhost:8080/test-resources/nabi/m/PDFViewer.html)
+- [http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html](http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html)
 
 ### Directions
 
 [Browser](http://localhost:8080/test-resources/ui5lab/browser/index.html) A sample browser showcasing artifacts from one or more libraries
 
+[Testuite](http://localhost:8080/test-resources/nabi/m/qunit/testsuite.qunit.html) A QUnit testsuite running all unit tests in this library
+
 [Control page](http://localhost:8080/test-resources/nabi/m/PDFViewer.html) An HTML test page instantiating the control
 
-[Test page](http://localhost:8080/test-resources/nabi/m/qunit/PDFViewer.qunit.html) A simple QUnit test
+[Control Test page](http://localhost:8080/test-resources/nabi/m/qunit/PDFViewer.qunit.html) A simple QUnit test
 
-[Testuite](http://localhost:8080/test-resources/nabi/m/qunit/testsuite.qunit.html) A QUnit testsuite running all unit tests in this library
+### Documentation
+
+- [nabi.m.ImageFileUploader](docs/nabi.m.ImageFileUploader/nabi.m.ImageFileUploader.md)
 
 ### Contributing
 
-Instructions how to connect to the community and contribute to the UI5lab project can be found in the [main repository](https://github.com/openui5/UI5Lab/)!
+This is a [UI5Lab](https://github.com/UI5Lab) project. Find out how to contribute at [UI5Lab-Central](https://github.com/UI5Lab/UI5Lab-central) and become part of the community!
 
-### Credits
-
-Thank you to @matz3 for your input and support!
