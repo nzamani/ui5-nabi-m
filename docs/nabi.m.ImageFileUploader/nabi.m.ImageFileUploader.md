@@ -20,7 +20,7 @@ Using HTML5 Canvas for scaling images down (“down sampling”) comes in pretty
 
 ## Examples
 
-All the examples below can be found in the UI5Lab Browser. For details see the sections "Getting Started" and "Directions" of the [README.md](../README.md). Following the directions allows you to try the examples out on localhost.
+All the examples below can be found in the UI5Lab Browser. For details see the sections "Getting Started" and "Directions" of the [README.md](../../README.md). Following the directions allows you to try the examples out on localhost.
 
 ### 1. Scaling Down by Factor
 
