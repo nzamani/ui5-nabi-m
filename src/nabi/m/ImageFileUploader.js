@@ -44,7 +44,7 @@ sap.ui.define([
 	 *
 	 * <b>Hint</b>: The term "resolution" is often referred to as for example "pixels per inch"
 	 * 			 or "dots per inch (DPI)". Instead, we use this term in a more pragmatic way, i.e.
-	 * 			 it simply means width x height in pixels (similar to your monitor's resoliution).
+	 * 			 it simply means width x height in pixels (similar to your monitor's resolution).
 	 *
 	 * @extends sap.ui.unified.FileUploader
 	 *
