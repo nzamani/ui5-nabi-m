@@ -47,6 +47,7 @@ sap.ui.define([
 	 * 			 it simply means width x height in pixels (similar to your monitor's resolution).
 	 *
 	 * @extends sap.ui.unified.FileUploader
+	 * @implements sap.ui.unified.IProcessableBlobs
 	 *
 	 * @author Nabi Zamani, nabisoft GmbH
 	 * @version ${version}
@@ -60,7 +61,7 @@ sap.ui.define([
 		 */
 		metadata : {
 			library : "nabi.m",
-			interfaces : [ ],
+			interfaces : ["sap.ui.unified.IProcessableBlobs"],
 			properties : {
 
 				/**
@@ -228,7 +229,7 @@ sap.ui.define([
 	 *
 	 * Take the files received and scale the images. THe scaled images will then be used for upload.
 	 *
-	 * This is a default implementation of the interface </code>sap.ui.unified.IUploadableBlobs</code>.
+	 * This is a default implementation of the interface </code>sap.ui.unified.IProcessableBlobs</code>.
 	 *
 	 * @override
 	 * @param {Blob[]} aBlobs The initial Blobs which can be used to determine/calculate a new array of Blobs for further processing.
