@@ -47,7 +47,6 @@ sap.ui.define([
 	 * 			 it simply means width x height in pixels (similar to your monitor's resolution).
 	 *
 	 * @extends sap.ui.unified.FileUploader
-	 * @implements sap.ui.unified.IProcessableBlobs
 	 *
 	 * @author Nabi Zamani, nabisoft GmbH
 	 * @version ${version}
@@ -61,7 +60,7 @@ sap.ui.define([
 		 */
 		metadata : {
 			library : "nabi.m",
-			interfaces : ["sap.ui.unified.IProcessableBlobs"],
+			interfaces : [],
 			properties : {
 
 				/**
