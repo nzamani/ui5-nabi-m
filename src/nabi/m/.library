@@ -4,11 +4,17 @@
 	<name>nabi.m</name>
 	<version>${version}</version>
 
-	<documentation>UI5 Library: nabi.m</documentation>
+	<documentation>UI5 Nabi Mobile Library: nabi.m</documentation>
 
 	<dependencies>
 		<dependency>
 			<libraryName>sap.ui.core</libraryName>
+		</dependency>
+		<dependency>
+			<libraryName>sap.m</libraryName>
+		</dependency>
+		<dependency>
+			<libraryName>sap.ui.unified</libraryName>
 		</dependency>
 	</dependencies>
 
