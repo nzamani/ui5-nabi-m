@@ -294,10 +294,6 @@ sap.ui.define([
 		throw new Error("ImageFileUploader only supports upload via XHR requests (sendXHR is always true). Thus, the setter is obsolete.");
 	};
 
-	if (!oField.getMetadata().isInstanceOf("sap.ui.core.IFormContent")) {
-		jQuery.sap.log.warning(oField + " is not valid Form content", this);
-	}
-
 	// Dirty fallback for older versions of UI5 (<1.52) where the parent does not implement
 	// the interface <code>sap.ui.unified.IProcessableBlobs</code> shipped with pull request https://github.com/SAP/openui5/pull/1623.
 	// ==> so only override in case sap.ui.unified.IProcessableBlobs is not available:
