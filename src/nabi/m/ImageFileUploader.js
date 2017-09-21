@@ -51,6 +51,8 @@ sap.ui.define([
 	 * @author Nabi Zamani, nabisoft GmbH
 	 * @version ${version}
 	 *
+	 * @constructor
+	 * @since 1.52
 	 * @public
 	 * @alias nabi.m.ImageFileUploader
 	 */
@@ -224,11 +226,10 @@ sap.ui.define([
 	//##############################################################
 
 	/**
-	 * FIXME This will work if the following pull request get merged: https://github.com/SAP/openui5/pull/1623
+	 * Take the files received and scale the images. The scaled images will then be used for upload via XHR.
 	 *
-	 * Take the files received and scale the images. THe scaled images will then be used for upload.
-	 *
-	 * This is a default implementation of the interface </code>sap.ui.unified.IProcessableBlobs</code>.
+	 * This is the implementation of the interface <code>sap.ui.unified.IProcessableBlobs</code>
+	 * received from the parent <code>sap.ui.unified.FileUploader<c/ode>.
 	 *
 	 * @override
 	 * @param {Blob[]} aBlobs The initial Blobs which can be used to determine/calculate a new array of Blobs for further processing.
@@ -293,74 +294,86 @@ sap.ui.define([
 		throw new Error("ImageFileUploader only supports upload via XHR requests (sendXHR is always true). Thus, the setter is obsolete.");
 	};
 
-	/**
-	 * FIXME This can be removed if the following pull request get merged: https://github.com/SAP/openui5/pull/1623
-	 * Starts the upload (as defined by uploadUrl).
-	 * @type {void}
-	 * @public
-	 */
-	ImageFileUploader.prototype.upload = function() {
-		//supress Upload if the FileUploader is not enabled
-		if (!this.getEnabled() || !window.File || !this.getValue()) {
-			jQuery.sap.log.debug("ImageFileUploader - Upload skipped because disabled");
-			return;
-		}
+	if (!oField.getMetadata().isInstanceOf("sap.ui.core.IFormContent")) {
+		jQuery.sap.log.warning(oField + " is not valid Form content", this);
+	}
 
-		this._bUploading = true;										//FIXME using private apis is dirty
-		var aFiles = this.FUEl.files;								//FIXME using private apis is dirty
+	// Dirty fallback for older versions of UI5 (<1.52) where the parent does not implement
+	// the interface <code>sap.ui.unified.IProcessableBlobs</code> shipped with pull request https://github.com/SAP/openui5/pull/1623.
+	// ==> so only override in case sap.ui.unified.IProcessableBlobs is not available:
+	if (FileUploader.getMetadata().isInstanceOf("sap.ui.unified.IProcessableBlobs")) {
+		// probably it would be better to search in FileUploader.getMetadata().getInterfaces() or getting it from library
 
-		//TODO probably it's better to split image file and non-image files into
-		//     two arrays and pass only the images to this._scaleFiles(...)
-		this._scaleFiles(aFiles).then(function(aScaledFiles){
-			var i, oBlob, aFilesToUpload, iMaxScaledFileSize;
-			try {
-				jQuery.sap.log.debug("Images scaled successfully, now start upload...");
+		/**
+		 * "Dirty" because private APIs of the parent are used inside this method.
+		 * @type {void}
+		 * @public
+		 * @override
+		 */
+		ImageFileUploader.prototype.upload = function() {
+			//supress Upload if the FileUploader is not enabled
+			if (!this.getEnabled() || !window.File || !this.getValue()) {
+				jQuery.sap.log.debug("ImageFileUploader - Upload skipped because disabled");
+				return;
+			}
 
-				// chek the file sizes + convert to window.File if possible
-				aFilesToUpload = [];
-				for (i=0; i<aScaledFiles.length;i++){
-					oBlob = aScaledFiles[i];
-					// check the max allowed file size
-					iMaxScaledFileSize = this.getMaximumScaledFileSize();
-					if (iMaxScaledFileSize > 0 && oBlob.size > iMaxScaledFileSize) {
-						jQuery.sap.log.info("File: " + oBlob.name + " is of size " + oBlob.size + " bytes which exceeds the file size limit of " + this.getMaximumScaledFileSize() + " bytes.");
-						this.fireMaxScaledFileSizeExceed({
-							fileName:oBlob.name,
-							fileSize:oBlob.size
-						});
-						this._bUploading = false;		//FIXME using private apis is dirty
-						return;
-					}
+			this._bUploading = true;									// using private apis is dirty
+			var aFiles = this.FUEl.files;								// using private apis is dirty
 
-					// this line would not send the file name because in FormData.append(...) the third param is not passed:
-					// this._sendFilesWithXHR(aScaledFiles);
-					//
-					// workaround: let's just create a new instance of window.File and pass it
-					// However, this does not work on IE/Edge, we don't use a polyfill //TODO use polyfill if possible
-					if (!Device.browser.msie && !Device.browser.edge) {
-						// use instances of window.File for image files instead of Blob
-						if ( !(oBlob instanceof window.File) ) {
-							aFilesToUpload.push( new File([oBlob], oBlob.name, {type: oBlob.type}) );
+			// probably it's better to split image file and non-image files into
+			// two arrays and pass only the images to this._scaleFiles(...)
+			this._scaleFiles(aFiles).then(function(aScaledFiles){
+				var i, oBlob, aFilesToUpload, iMaxScaledFileSize;
+				try {
+					jQuery.sap.log.debug("Images scaled successfully, now start upload...");
+
+					// chek the file sizes + convert to window.File if possible
+					aFilesToUpload = [];
+					for (i=0; i<aScaledFiles.length;i++){
+						oBlob = aScaledFiles[i];
+						// check the max allowed file size
+						iMaxScaledFileSize = this.getMaximumScaledFileSize();
+						if (iMaxScaledFileSize > 0 && oBlob.size > iMaxScaledFileSize) {
+							jQuery.sap.log.info("File: " + oBlob.name + " is of size " + oBlob.size + " bytes which exceeds the file size limit of " + this.getMaximumScaledFileSize() + " bytes.");
+							this.fireMaxScaledFileSizeExceed({
+								fileName:oBlob.name,
+								fileSize:oBlob.size
+							});
+							this._bUploading = false;		// using private apis is dirty
+							return;
+						}
+
+						// this line would not send the file name because in FormData.append(...) the third param is not passed:
+						// this._sendFilesWithXHR(aScaledFiles);
+						//
+						// workaround: let's just create a new instance of window.File and pass it
+						// However, this does not work on IE/Edge, we don't use a polyfill //TODO use polyfill if possible
+						if (!Device.browser.msie && !Device.browser.edge) {
+							// use instances of window.File for image files instead of Blob
+							if ( !(oBlob instanceof window.File) ) {
+								aFilesToUpload.push( new File([oBlob], oBlob.name, {type: oBlob.type}) );
+							} else {
+								aFilesToUpload.push(oBlob);
+							}
 						} else {
 							aFilesToUpload.push(oBlob);
 						}
-					} else {
-						aFilesToUpload.push(oBlob);
 					}
+
+					// finally call the private API - sorry for that :-(
+					this._sendFilesWithXHR(aFilesToUpload);		// using private apis is dirty
+
+				} catch (oException) {
+					jQuery.sap.log.error("File upload failed:\n" + oException.message);
+					this._bUploading = false;
 				}
+			}.bind(this)).catch(function(){
+				jQuery.sap.log.error("File upload failed because on or more files could not be scaled!");
+			});
 
-				//finally call the private API - sorry for that :-(
-				this._sendFilesWithXHR(aFilesToUpload);		//FIXME using private apis is dirty
+		};
 
-			} catch (oException) {
-				jQuery.sap.log.error("File upload failed:\n" + oException.message);
-				this._bUploading = false;
-			}
-		}.bind(this)).catch(function(){
-			jQuery.sap.log.error("File upload failed because on or more files could not be scaled!");
-		});
-
-	};
+	}
 
 	//##############################################################
 	// Own/New APIs
