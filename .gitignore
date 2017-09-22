@@ -1,5 +1,39 @@
-node_modules
-bower_components
+# build artefacts
+build
 dist
+
+# Eclipse
+.project
+.classpath
+.settings/
+.launch
+.launch/
+
+# Netbeans
+nb-configuration.xml
+
+# IntelliJ
+.idea/
+*.iml/
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+target/
+
+# Node
+node_modules
 npm-debug.log
-.idea
+
+# bower
+bower_components
+
+# eslint
+eslint.log
+eslint.tap
+
+# Other
+log
+bin
