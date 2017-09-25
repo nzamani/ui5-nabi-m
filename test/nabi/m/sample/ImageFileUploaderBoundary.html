@@ -41,7 +41,7 @@
 						sap.m.MessageToast.show(filename + " has " + filesize + " bytes which is " + diff + " bytes more than the max of " + maxSize + " bytes.");
 					},
 					uploadComplete : function (oEvent) {
-						var sStatus = oEvent.getParameter("status");
+						var sMsg, sStatus = oEvent.getParameter("status");
 						if (sStatus === 200) {
 							sMsg = "Return Code: 200 "	;
 							oEvent.getSource().setValue("");
