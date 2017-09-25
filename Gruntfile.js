@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 		}
 	} else {
 		//TODO read from input?
-		grunt.log.writeln("INFO: NW APAB Deplyoment won't work because credentials file not found: " + SAPDEPLOY_FILE_PATH);
+		grunt.log.writeln("INFO: NW ABAP Deplyoment won't work because credentials file not found: " + SAPDEPLOY_FILE_PATH);
 	}
 
 	//https://www.npmjs.com/package/multiparty
