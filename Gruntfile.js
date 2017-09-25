@@ -284,6 +284,19 @@ module.exports = function(grunt) {
 			gruntfile: ['Gruntfile.js']
 		},
 
+		compress: {
+			dist : {
+				options: {
+					archive: "<%= dir.dist %>/nabi-m.zip"
+				},
+				expand: true,
+				cwd: "<%= dir.dist %>/resources",
+				src: ["**/*"],
+				dot : true,
+				dest: "/"
+			}
+		},
+
 		nwabap_ui5uploader: sapDeployConfig
 
 	});
@@ -291,6 +304,7 @@ module.exports = function(grunt) {
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-openui5');
 	grunt.loadNpmTasks('grunt-eslint');
@@ -305,7 +319,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['eslint']);
 
 	// Build task
-	grunt.registerTask('build', ['clean', 'openui5_theme', 'openui5_preload', 'copy']);
+	grunt.registerTask('build', ['clean', 'openui5_theme', 'openui5_preload', 'copy', 'compress:dist']);
 
 	// SAP deployment
 	grunt.registerTask("sapdeploy", ['lint', 'build', 'nwabap_ui5uploader']);
