@@ -6,25 +6,27 @@ UI5 Nabi Mobile - a few things we would love to share with the community.
 
 ## Getting started
 
-1. Install node.js (get it from [nodejs.org](http://nodejs.org/)).
- * If working behind a proxy, you need to configure it properly (HTTP_PROXY / HTTPS_PROXY / NO_PROXY environment variables)
+1. Install [node.js](http://nodejs.org/) (make sure to choose the LTS version, i.e. v6.11.2 LTS)
+    * If working behind a proxy, you need to configure it properly (see [Developing UI5](https://github.com/SAP/openui5/blob/master/docs/developing.md) for details)
 
-2. Clone the repository and navigate into it
+1. Install [git](https://git-scm.com/) if you haven't
+
+1. Clone the repository and navigate into it
 ```sh
 git clone https://github.com/nzamani/ui5-nabi-m
 cd ui5-nabi-m
 ```
-3. Install all npm dependencies (also installs all bower dependencies)
+1. Install all npm dependencies (also installs all bower dependencies)
 ```sh
 npm install
 ```
 
-4. Run npm start to lint, build and run a local server (have a look into `Gruntfile.js` to see all the tasks).
+1. Run npm start to lint, build and run a local server (have a look into `Gruntfile.js` to see all the tasks).
 ```sh
 npm start
 ```
 
-5. Open a test page in your browser:
+1. Open a test page in your browser:
 - [http://localhost:8080/test-resources/nabi/m/PDFViewer.html](http://localhost:8080/test-resources/nabi/m/PDFViewer.html)
 - [http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html](http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html)
 
@@ -38,11 +40,21 @@ npm start
 
 [Control Test page](http://localhost:8080/test-resources/nabi/m/qunit/PDFViewer.qunit.html) A simple QUnit test
 
-### Documentation
+## Documentation
 
 - [nabi.m.ImageFileUploader](docs/nabi.m.ImageFileUploader/nabi.m.ImageFileUploader.md)
 
-### Contributing
+## Deployment
+
+- [Deployment to SAP Netweaver ABAP](docs/deployment/sap-nw-abap-deployment.md)
+- [Deployment to SAP Cloud Platform](docs/deployment/sap-cloud-platform-deployment.md)
+
+## Consumption of nabi.m
+
+- [Consumption of nabi.m in own apps](docs/deployment/consuming-lib-in-apps.md)
+
+
+## Contributing
 
 This is a [UI5Lab](https://github.com/UI5Lab) project. Find out how to contribute at [UI5Lab-Central](https://github.com/UI5Lab/UI5Lab-central) and become part of the community!
 

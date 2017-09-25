@@ -4,6 +4,7 @@ test
 node_modules
 bower_components
 demoapp
+docs
 .idea
 .editorconfig
 .eslintrc
