@@ -12,23 +12,27 @@ UI5 Nabi Mobile - a few things we would love to share with the community.
 1. Install [git](https://git-scm.com/) if you haven't
 
 1. Clone the repository and navigate into it
-```sh
-git clone https://github.com/nzamani/ui5-nabi-m
-cd ui5-nabi-m
-```
+
+	```sh
+	git clone https://github.com/nzamani/ui5-nabi-m
+	cd ui5-nabi-m
+	```
+
 1. Install all npm dependencies (also installs all bower dependencies)
-```sh
-npm install
-```
+
+	```sh
+	npm install
+	```
 
 1. Run npm start to lint, build and run a local server (have a look into `Gruntfile.js` to see all the tasks).
-```sh
-npm start
-```
+
+	```sh
+	npm start
+	```
 
 1. Open a test page in your browser:
-- [http://localhost:8080/test-resources/nabi/m/PDFViewer.html](http://localhost:8080/test-resources/nabi/m/PDFViewer.html)
-- [http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html](http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html)
+	- [http://localhost:8080/test-resources/nabi/m/PDFViewer.html](http://localhost:8080/test-resources/nabi/m/PDFViewer.html)
+	- [http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html](http://localhost:8080/test-resources/nabi/m/ImageFileUploader.html)
 
 ### Directions
 
