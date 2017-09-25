@@ -1,0 +1,10 @@
+{
+	"upload_build_abap_750":{
+		"user": "myUser",
+		"pwd": "myPwd"
+	},
+	"upload_build_abap_740": {
+		"user": "myUser",
+		"pwd": "myPwd"
+	}
+}

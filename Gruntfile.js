@@ -1,5 +1,26 @@
+/* eslint-env es6 */
 module.exports = function(grunt) {
 	'use strict';
+
+	// Log time how long tasks take
+	require("grunt-timer").init(grunt, { deferLogs: true, friendlyTime: true, color: "cyan"});
+
+	// read sap deployment config file (only needed for sap abap/cloud deployment)
+	const sapDeployConfig =  grunt.file.exists(".sapdeploy.json") ? grunt.file.readJSON(".sapdeploy.json") : {};
+	// make sure to set user and password by reading them from HOME dir
+	// read config file for sap deployment (user, password).
+	const SAPDEPLOY_FILE_PATH = process.env['HOME'] + '/.sapdeployuser.json';
+	const oCredentials = grunt.file.exists(SAPDEPLOY_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOY_FILE_PATH) : null;
+	if (oCredentials){
+		for (let key in oCredentials) {
+			if (oCredentials.hasOwnProperty(key) && sapDeployConfig[key]) {
+				sapDeployConfig[key].options.auth = oCredentials[key];
+			}
+		}
+	} else {
+		//TODO read from input?
+		grunt.log.writeln("INFO: NW APAB Deplyoment won't work because credentials file not found: " + SAPDEPLOY_FILE_PATH);
+	}
 
 	//https://www.npmjs.com/package/multiparty
 	var multiparty = require('multiparty');
@@ -78,6 +99,28 @@ module.exports = function(grunt) {
 			// finally do the job for us
 			form.parse(req);
 		}
+	};
+
+	/**
+	 * Rename JavaScript files, all others stay as they are. Examples:
+	 * App.controller.js ==> App-dbg.controller.js
+	 * Component.js ==> Component-dbg.js
+	 *
+	 * @param {string} dest the destination folder
+	 * @param {string} src the filename
+	 * @returns {string }the new file name for js files
+	 */
+	const fnFileRename = function(dest, src) {
+		let destFilename = "";
+		if (src.endsWith(".controller.js")) {
+			destFilename = dest + src.replace(/\.controller\.js$/, "-dbg.controller.js");
+		} else if (src.endsWith(".js")) {
+			destFilename = dest + src.replace(/\.js$/, "-dbg.js");
+		} else {
+			destFilename = dest + src;
+		}
+		grunt.log.writeln(src + " ==>" + destFilename + "(dest = " + dest + ", src = " + src + ")");
+		return destFilename;
 	};
 
 	grunt.initConfig({
@@ -191,7 +234,8 @@ module.exports = function(grunt) {
 			library: {
 				options: {
 					resources: '<%= dir.src %>',
-					dest: '<%= dir.dist %>/resources'
+					dest: '<%= dir.dist %>/resources',
+					compatVersion : '1.44'
 				},
 				libraries: {
 					'nabi/m': {
@@ -210,21 +254,27 @@ module.exports = function(grunt) {
 
 		copy: {
 			dist: {
-				files: [ {
-					expand: true,
-					cwd: '<%= dir.src %>',
-					src: [
-						'**'
-					],
-					dest: '<%= dir.dist %>/resources'
-				}, {
-					expand: true,
-					cwd: '<%= dir.test %>',
-					src: [
-						'**'
-					],
-					dest: '<%= dir.dist %>/test-resources'
-				} ]
+				files: [
+					{	//first all resources relevant for *-dbg.js
+						expand: true,
+						src: [ '**', '!nabi/m/themes/**', '!nabi/m/thirdparty/**' ],
+						cwd: '<%= dir.src %>',
+						dest: '<%= dir.dist %>/resources/',		//trailing slash is important
+						rename: fnFileRename
+					}, {
+						//then everything else
+						expand: true,
+						cwd: '<%= dir.src %>',
+						src: ["nabi/m/themes/**", "nabi/m/thirdparty/**", 'nabi/m/.library'],
+						dest: '<%= dir.dist %>/resources'
+					}, {
+						//finally the test resources
+						expand: true,
+						cwd: '<%= dir.test %>',
+						src: ['**'],
+						dest: '<%= dir.dist %>/test-resources'
+					}
+				]
 			}
 		},
 
@@ -232,7 +282,9 @@ module.exports = function(grunt) {
 			src: ['<%= dir.src %>'],
 			test: ['<%= dir.test %>'],
 			gruntfile: ['Gruntfile.js']
-		}
+		},
+
+		nwabap_ui5uploader: sapDeployConfig
 
 	});
 
@@ -242,6 +294,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-openui5');
 	grunt.loadNpmTasks('grunt-eslint');
+	grunt.loadNpmTasks('grunt-nwabap-ui5uploader');
 
 	// Server task
 	grunt.registerTask('serve', function(target) {
@@ -252,12 +305,14 @@ module.exports = function(grunt) {
 	grunt.registerTask('lint', ['eslint']);
 
 	// Build task
-	grunt.registerTask('build', ['openui5_theme', 'openui5_preload', 'copy']);
+	grunt.registerTask('build', ['clean', 'openui5_theme', 'openui5_preload', 'copy']);
+
+	// SAP deployment
+	grunt.registerTask("sapdeploy", ['lint', 'build', 'nwabap_ui5uploader']);
 
 	// Default task
 	grunt.registerTask('default', [
 		'lint',
-		'clean',
 		'build',
 		'serve:dist'
 	]);
