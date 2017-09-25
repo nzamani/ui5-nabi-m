@@ -1,0 +1,33 @@
+{
+  "welcomeFile": "/webapp/index.html",
+  "routes": [
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+	{
+		"path": "/resources/nabi/m",
+		"target": {
+			"type": "application",
+			"name": "nabimobilelib", 
+			"entryPath": "/nabi/m/"
+		},
+		"description": "UI5 Nabi Mobile Library"
+	}
+  ],
+  "sendWelcomeFileRedirect": true
+}

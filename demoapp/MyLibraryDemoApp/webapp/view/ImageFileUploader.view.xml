@@ -1,0 +1,28 @@
+<mvc:View
+	controllerName="nabi.demo.MyLibraryDemoApp.controller.ImageFileUploader"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:nabi="nabi.m"
+	height="100%">
+	<Page
+		title="nabi.m.ImageFileUploader"
+		showNavButton="true"
+		navButtonPress="onNavBack"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<VBox>
+				
+				<nabi:ImageFileUploader 
+					uploadUrl="/my/upload/url"
+					scaleFactor="0.5"
+					uploadOnChange="true"
+					uploadComplete="onUploadComplete"/>
+				
+				<Text text="Hint: uploadUrl does not exist, thus you'll get an error - this is expected in this demo!"/>
+				
+			</VBox>
+			
+		</content>
+	</Page>
+</mvc:View>

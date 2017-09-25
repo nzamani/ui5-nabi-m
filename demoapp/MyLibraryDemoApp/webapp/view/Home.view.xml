@@ -1,0 +1,25 @@
+<mvc:View
+	controllerName="nabi.demo.MyLibraryDemoApp.controller.Home"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:nabi="nabi.m"
+	height="100%">
+	<Page 
+		title="Using the nabi.m library"
+		class="sapUiResponsiveContentPadding">
+		<content>
+			<VBox>
+				
+				<Button
+					text="Go to nabi.m.ImageFileUploader"
+					press="onGoToImageFileUploader"/>
+					
+				<Button
+					text="Go to nabi.m.PDFViewer"
+					press="onGoToPDFViewer"/>
+					
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>
