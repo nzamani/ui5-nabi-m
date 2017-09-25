@@ -21,7 +21,7 @@
 
 ## Important parts of the Demo App
 
-1. The file `neo-app.json` is only needed for deployment on SAPCP. To make sure the linrary is found at runtime the following config is important in `neo-app.json` (assuming you have followed [Deployment to SAP Cloud Platform](sap-cloud-platform-deployment.md)):
+1. The file `neo-app.json` is only needed for the deployment to SAPCP. To make sure the library is found at runtime the following config is important in `neo-app.json` (assuming you have followed [Deployment to SAP Cloud Platform](sap-cloud-platform-deployment.md)):
 
     ```json
 	{
@@ -40,9 +40,8 @@
 1. The `manifest.json` must contain the dependency to `nabi.m`:
 
     ```json
-	//...
 	"sap.ui5": {
-		//...
+		
 		"dependencies": {
 			"minUI5Version": "1.30.0",
 			"libs": {
@@ -56,11 +55,11 @@
 				"nabi.m": {}
 			}
 		},
-		//..
+		
 	}
 	```
 
-1. Then the usage works just like for any other UI5 control (i.e. in XMLViews by declaring the namespace for nabi.m):
+1. Then the consumption works just like for any other UI5 control (i.e. in XMLViews by declaring the namespace for nabi.m):
 
     ```xml
 	<mvc:View
