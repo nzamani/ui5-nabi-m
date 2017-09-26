@@ -2,6 +2,9 @@
 build
 dist
 
+# user project config
+.user.nabi.json
+
 # Eclipse
 .project
 .classpath
