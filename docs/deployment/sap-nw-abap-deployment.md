@@ -9,35 +9,94 @@
 
 ## SAP Netweaver ABAP
 
-1. Create `HOME` environment variable pointing to your user's home dir
-    - this is later used to find the file `.sapdeployuser.json` whixch will later contain your credentials
 
-1. Create a file `.sapdeployuser.json` in you user home dir (replace user/password with your real credentials), i.e. by copying the template:
-    - `cp .sapdeployuser.template.json ~/.sapdeployuser.json`
-	- Change credentials inside the file you created, i.e. with `vi ~/.sapdeployuser.json`:
+1. Create one of the following 2 files in the root of this project: `.nabi.json` and/or `.user.nabi.json`, i.e. by copying the template + changing the content with vi:
+    - `cp defaults/.nabi.json .nabi.json` and then `vi .nabi.json`
+	- `cp defaults/.nabi.json .user.nabi.json` and then `vi .user.nabi.json`
+	- The content of the file describes where to find the files `.sapdeploy.json` and `.sapdeployuser.json`, which we create in the next steps:
+		- `.nabi.json` (default):
+
+			```json
+			{
+				"_version": "0.2.0",
+				"sapdeploy" : {
+					"configFile" : ".sapdeploy.json",
+					"credentialsFile" : "~/.sapdeployuser.json"
+				},
+				"sapui5" : {
+					"sdk" : "~/sapui5/"
+				}
+			}
+			```
+		
+		- `.user.nabi.json` (we only overwrite the path to the credentialsFile):
+
+			```json
+			{
+				"_version": "0.2.0",
+				"sapdeploy" : {
+					"credentialsFile" : "/home/myuser/.sapdeployuser.json"
+				}
+			}
+			```
+
+	**Hint:** The file `.nabi.json` can contain global settings checked in into git so that everybody has these settings. Using `.user.nabi.json` allows to overwrite the project/global settings according to the needs of the current developer. Thus, `.user.nabi.json` is never checked in (see `.gitignore` file)! Having one of the 2 files with the correct configuration is enough for the deployment via sapdeploy. In the example above we keep the configFile at `.sapdeploy.json` (default) and we overwrite the credentialsFile with `/home/myuser/.sapdeployuser.json` assuming your user's home dir is in `/home/myuser/` (please change as needed). In this case we actually don't even need the file `.nabi.json` because its content is the default anyway.
+
+	**IMPORTANT:** It is suggested to put the credentials file (`.sapdeployuser.json`) into the user's home dir. For details see below.
+
+1. Create a file `.sapdeploy.json` in the root of this project, i.e. by copying the template + changing the vontent with vi:
+    - `cp defaults/.sapdeploy.json .sapdeploy.json`
+	- `vi .sapdeploy.json`:
 
         ```json
-        {
-			"upload_build_abap_750":{
-				"user": "myUser",
-				"pwd": "myPwd"
+		{
+			"upload_build_abap_750": {
+				"options": {
+					"conn": {
+						"server": "https://myserver750:8181",
+						"useStrictSSL" : true
+					},
+					"ui5": {
+						"package": "ZZ_UI5_REPO",
+						"bspcontainer": "ZZ_UI5_TRACKED",
+						"bspcontainer_text": "UI5 upload",
+						"transportno": "DEVK900000",
+						"language" : "EN",
+						"calc_appindex": true
+					},
+					"resources": {
+						"cwd": "<%= dir.dist %>/resources",
+						"src": "**/*.*"
+					}
+				}
 			},
 			"upload_build_abap_740": {
-				"user": "myUser",
-				"pwd": "myPwd"
+				"options": {
+					"conn": {
+						"server": "https://myserver740:8181",
+						"useStrictSSL" : true
+					},
+					"ui5": {
+						"package": "ZZ_UI5_REPO",
+						"bspcontainer": "ZZ_UI5_TRACKED",
+						"bspcontainer_text": "UI5 upload",
+						"transportno": "DEVK900000",
+						"language" : "EN",
+						"calc_appindex": true
+					},
+					"resources": {
+						"cwd": "<%= dir.dist %>/resources",
+						"src": "**/*.*"
+					}
+				}
 			}
 		}
         ```
 
-	**Hint:** Make sure not to show this file to anyone. It's ouside of the project to avoid it gets checked in accidentally. 
-	The credentials in this file are used for the sap deployment task (sapdeploy), see below for details. `upload_build_abap_750` and `upload_build_abap_750` are placeholders and they correspond to the configuration of the sapdeploy task.
-
-1. Update the file `.sapdeploy.json` in the root of this project
-
-	* The example content of the file deploys to both `upload_build_abap_750` and `upload_build_abap_750`
-	* Each of them can have it's own cofiguration and credentials (see also previous step)
-	* This file can and should be checked in into your own git repo (maybe in an own branch)
-    * The basic config for each target system looks like this:
+	- The example content of the file deploys to both `upload_build_abap_750` and `upload_build_abap_750`
+	- Each of them can have it's own cofiguration and credentials (see also next step)
+	- This file can and should be checked in into your own git repo (maybe in an own branch)
+    - The basic config for each target system looks like this:
 		* **conn.server**: The base url to the abap server used as target for deployment
 		* **conn.useStrictSSL**: If true then the server must have a valid certificate
 		* **ui5.package**: The package in which the BSP is created
@@ -48,7 +107,38 @@
 		* **ui5.calc_appindex**: If true then the UI5 app index gets calculated
 
     **Hint:** The ABAP deployment intertnally uses [grunt-nwabap-ui5uploader](https://github.com/pfefferf/grunt-nwabap-ui5uploader). Have a look at the documentation for config details. Basically, what you see in `.sapdeploy.json` comes from [grunt-nwabap-ui5uploader](https://github.com/pfefferf/grunt-nwabap-ui5uploader). However, the `auth` config 
-	is extracted into `~/.sapdeployuser.json`.
+	is extracted into `.sapdeployuser.json` (see next step).
+
+
+1. Create a file `.sapdeployuser.json` in you user's home dir (replace user/password with your real credentials), i.e. by copying the template + changing the content/credentials with vi:
+    - `cp defaults/.sapdeployuser.json ~/.sapdeployuser.json`
+	- `vi ~/.sapdeployuser.json`:
+
+        ```json
+		{
+			"upload_build_abap_750":{
+				"options":{
+					"auth":{
+						"user": "myUser",
+						"pwd": "myPwd"
+					}
+				}
+			},
+			"upload_build_abap_740": {
+				"options":{
+					"auth":{
+						"user": "myUser",
+						"pwd": "myPwd"
+					}
+				}
+			}
+		}
+        ```
+
+	**Hint:** Make sure not to show this file to anyone. It's ouside of the project to avoid it gets checked in accidentally. 
+	The credentials in this file are used for the sap deployment task (sapdeploy), see below for details. `upload_build_abap_750` and `upload_build_abap_750` are placeholders and they correspond to the configuration of the sapdeploy task (see file `.sapdeploy.json` in project root).
+
+
 
 1. Lint + build + deploy to SAP via Grunt
     * `grunt sapdeploy` : build + deploy to SAP
