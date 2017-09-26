@@ -5,22 +5,20 @@ module.exports = function(grunt) {
 	// Log time how long tasks take
 	require("grunt-timer").init(grunt, { deferLogs: true, friendlyTime: true, color: "cyan"});
 
-	// read sap deployment config file (only needed for sap abap/cloud deployment)
-	const sapDeployConfig =  grunt.file.exists(".sapdeploy.json") ? grunt.file.readJSON(".sapdeploy.json") : {};
-	// make sure to set user and password by reading them from HOME dir
-	// read config file for sap deployment (user, password).
-	const SAPDEPLOY_FILE_PATH = process.env['HOME'] + '/.sapdeployuser.json';
-	const oCredentials = grunt.file.exists(SAPDEPLOY_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOY_FILE_PATH) : null;
-	if (oCredentials){
-		for (let key in oCredentials) {
-			if (oCredentials.hasOwnProperty(key) && sapDeployConfig[key]) {
-				sapDeployConfig[key].options.auth = oCredentials[key];
-			}
-		}
-	} else {
-		//TODO read from input?
-		grunt.log.writeln("INFO: NW ABAP Deplyoment won't work because credentials file not found: " + SAPDEPLOY_FILE_PATH);
-	}
+	const objectMerge = require('object-merge');
+
+	// derive correct config from ".user.nabi.json" + ".nabi.json" in project root
+	const nabiDefaultConfig =  grunt.file.exists("defaults/.nabi.json") ? grunt.file.readJSON("defaults/.nabi.json") : {};
+	const nabiProjectConfig =  grunt.file.exists(".nabi.json") ? grunt.file.readJSON(".nabi.json") : {};
+	const nabiUserConfig =  grunt.file.exists(".user.nabi.json") ? grunt.file.readJSON(".user.nabi.json") : {};
+	const nabiFinalCfg = objectMerge(nabiDefaultConfig, nabiProjectConfig, nabiUserConfig);
+	// read sap deployment config file (only needed for sap nw abap deployment)
+	const SAPDEPLOY_FILE_PATH = nabiFinalCfg.sapdeploy.configFile;
+	var sapDeployConfig =  grunt.file.exists(SAPDEPLOY_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOY_FILE_PATH) : {};
+	// read + merge credentials file for sap nw abap deployment
+	const SAPDEPLOYUSER_FILE_PATH = nabiFinalCfg.sapdeploy.credentialsFile;
+	const oCredentials = grunt.file.exists(SAPDEPLOYUSER_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOYUSER_FILE_PATH) : {};
+	sapDeployConfig = objectMerge(sapDeployConfig, oCredentials);
 
 	//https://www.npmjs.com/package/multiparty
 	var multiparty = require('multiparty');
