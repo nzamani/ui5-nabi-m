@@ -5,6 +5,7 @@ node_modules
 bower_components
 demoapp
 docs
+defaults
 .idea
 .editorconfig
 .eslintrc
