@@ -8,13 +8,13 @@ module.exports = function(grunt) {
 	const objectMerge = require('object-merge');
 
 	// derive correct config from ".user.nabi.json" + ".nabi.json" in project root
-	const nabiDefaultConfig =  grunt.file.exists("defaults/.nabi.json") ? grunt.file.readJSON("defaults/.nabi.json") : {};
-	const nabiProjectConfig =  grunt.file.exists(".nabi.json") ? grunt.file.readJSON(".nabi.json") : {};
-	const nabiUserConfig =  grunt.file.exists(".user.nabi.json") ? grunt.file.readJSON(".user.nabi.json") : {};
+	const nabiDefaultConfig = grunt.file.exists("defaults/.nabi.json") ? grunt.file.readJSON("defaults/.nabi.json") : {};
+	const nabiProjectConfig = grunt.file.exists(".nabi.json") ? grunt.file.readJSON(".nabi.json") : {};
+	const nabiUserConfig = grunt.file.exists(".user.nabi.json") ? grunt.file.readJSON(".user.nabi.json") : {};
 	const nabiFinalCfg = objectMerge(nabiDefaultConfig, nabiProjectConfig, nabiUserConfig);
 	// read sap deployment config file (only needed for sap nw abap deployment)
 	const SAPDEPLOY_FILE_PATH = nabiFinalCfg.sapdeploy.configFile;
-	var sapDeployConfig =  grunt.file.exists(SAPDEPLOY_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOY_FILE_PATH) : {};
+	let sapDeployConfig = grunt.file.exists(SAPDEPLOY_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOY_FILE_PATH) : {};
 	// read + merge credentials file for sap nw abap deployment
 	const SAPDEPLOYUSER_FILE_PATH = nabiFinalCfg.sapdeploy.credentialsFile;
 	const oCredentials = grunt.file.exists(SAPDEPLOYUSER_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOYUSER_FILE_PATH) : {};

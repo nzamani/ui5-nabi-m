@@ -13,7 +13,7 @@
 1. Create one of the following 2 files in the root of this project: `.nabi.json` and/or `.user.nabi.json`, i.e. by copying the template + changing the content with vi:
     - `cp defaults/.nabi.json .nabi.json` and then `vi .nabi.json`
 	- `cp defaults/.nabi.json .user.nabi.json` and then `vi .user.nabi.json`
-	- The content of the file describes where to find the files `.sapdeploy.json` and `.sapdeployuser.json`, which we create in the next steps:
+	- The content of the file describes where to find the files `.sapdeploy.json` and `.sapdeployuser.json`, which we will  create in the next steps:
 		- `.nabi.json` (default):
 
 			```json
@@ -44,7 +44,7 @@
 
 	**IMPORTANT:** It is suggested to put the credentials file (`.sapdeployuser.json`) into the user's home dir. For details see below.
 
-1. Create a file `.sapdeploy.json` in the root of this project, i.e. by copying the template + changing the vontent with vi:
+1. Create a file `.sapdeploy.json` in the root of this project, i.e. by copying the template + changing the content with vi:
     - `cp defaults/.sapdeploy.json .sapdeploy.json`
 	- `vi .sapdeploy.json`:
 
