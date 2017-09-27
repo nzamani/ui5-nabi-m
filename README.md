@@ -7,9 +7,18 @@ UI5 Nabi Mobile - a few things we would love to share with the community.
 ## Getting started
 
 1. Install [node.js](http://nodejs.org/) (make sure to choose the LTS version, i.e. v6.11.2 LTS)
-    * If working behind a proxy, you need to configure it properly (see [Developing UI5](https://github.com/SAP/openui5/blob/master/docs/developing.md) for details)
-
+    
 1. Install [git](https://git-scm.com/) if you haven't
+
+1. Optional: Proxy Configuration in case you are working behind a proxy (see [Developing UI5](https://github.com/SAP/openui5/blob/master/docs/developing.md) for details)
+	
+	```
+	HTTP_PROXY=http://proxy:8080
+	HTTPS_PROXY=http://proxy:8080
+	FTP_PROXY=http://proxy:8080
+	NO_PROXY=localhost,127.0.0.1,.mycompany.corp
+	```
+
 
 1. Clone the repository and navigate into it
 
