@@ -32,7 +32,7 @@ sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
 		],
 		elements: [],
 		noLibraryCSS: false,
-		version: "${version}"
+		version: "0.2.0"
 	});
 
 	/**
