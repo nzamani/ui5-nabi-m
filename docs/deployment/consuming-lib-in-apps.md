@@ -1,4 +1,4 @@
-# Consuming nabi.m in UI5 apps deployed of SAPCP or NW ABAP
+# Consuming nabi.m in UI5 apps deployed to SAPCP or NW ABAP
 
 ## Before you continue deploy the nabi.m library
 

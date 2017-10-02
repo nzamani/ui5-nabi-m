@@ -1,4 +1,4 @@
-# Deployment of nabi.m SAP NW ABAP
+# Deployment of nabi.m to SAP NW ABAP
 
 ## Before Deployment
 
