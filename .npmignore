@@ -6,7 +6,9 @@ bower_components
 demoapp
 docs
 defaults
+dist/nabi-m.zip
 .idea
 .editorconfig
 .eslintrc
 .nabi.json
+.user.nabi.json
