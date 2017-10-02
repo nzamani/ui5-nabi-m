@@ -9,3 +9,4 @@ defaults
 .idea
 .editorconfig
 .eslintrc
+.nabi.json
