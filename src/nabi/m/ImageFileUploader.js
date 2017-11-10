@@ -226,6 +226,14 @@ sap.ui.define([
 	//##############################################################
 
 	/**
+	 * Override parent because we have to pass true for the async param upload(true)
+	 * @param {boolean} bAsync this parameter is alway true no matter what you pass. See parent API docs for details.
+	 */
+	ImageFileUploader.prototype.upload = function() {
+		FileUploader.prototype.upload.call(this, true);
+	};
+
+	/**
 	 * Take the files received and scale the images. The scaled images will then be used for upload via XHR.
 	 *
 	 * This is the implementation of the interface <code>sap.ui.unified.IProcessableBlobs</code>
