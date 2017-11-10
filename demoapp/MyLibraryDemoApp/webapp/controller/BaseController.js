@@ -1,8 +1,9 @@
-sap.ui.define(["sap/ui/core/mvc/Controller",
-	"sap/ui/core/routing/History"],
-function (Controller, History) {
+sap.ui.define([
+	"sap/ui/core/mvc/Controller",
+	"sap/ui/core/routing/History"
+], function (Controller, History) {
 	"use strict";
-	return Controller.extend("sap.ui.demo.nav.controller.BaseController", {
+	return Controller.extend("nabi.demo.MyLibraryDemoApp.controller.BaseController", {
 		getRouter : function () {
 			return sap.ui.core.UIComponent.getRouterFor(this);
 		},

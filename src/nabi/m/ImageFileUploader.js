@@ -227,7 +227,7 @@ sap.ui.define([
 
 	/**
 	 * Override parent because we have to pass true for the async param upload(true)
-	 * @param {boolean} bAsync this parameter is alway true no matter what you pass. See parent API docs for details.
+	 * @param {boolean} bPreProcessFiles this parameter is always true no matter what you pass. See parent API docs for details.
 	 */
 	ImageFileUploader.prototype.upload = function() {
 		FileUploader.prototype.upload.call(this, true);
