@@ -65,7 +65,7 @@
 						"calc_appindex": true
 					},
 					"resources": {
-						"cwd": "<%= dir.dist %>/resources",
+						"cwd": "<%= dir.dist %>/resources/nabi/m",
 						"src": "**/*.*"
 					}
 				}
@@ -85,7 +85,7 @@
 						"calc_appindex": true
 					},
 					"resources": {
-						"cwd": "<%= dir.dist %>/resources",
+						"cwd": "<%= dir.dist %>/resources/nabi/m",
 						"src": "**/*.*"
 					}
 				}
@@ -105,6 +105,7 @@
 		* **ui5.transportno**: The existing and modifiable Transport Request (make sure you have a task in this request!)
 		* **ui5.language**: please always use "EN"
 		* **ui5.calc_appindex**: If true then the UI5 app index gets calculated
+		* **resources:cwd**: Must point to the folder containing the lib manifest (in the build results folder)
 
     **Hint:** The ABAP deployment intertnally uses [grunt-nwabap-ui5uploader](https://github.com/pfefferf/grunt-nwabap-ui5uploader). Have a look at the documentation for config details. Basically, what you see in `.sapdeploy.json` comes from [grunt-nwabap-ui5uploader](https://github.com/pfefferf/grunt-nwabap-ui5uploader). However, the `auth` config 
 	is extracted into `.sapdeployuser.json` (see next step).

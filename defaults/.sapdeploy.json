@@ -14,7 +14,7 @@
 				"calc_appindex": true
 			},
 			"resources": {
-				"cwd": "<%= dir.dist %>/resources",
+				"cwd": "<%= dir.dist %>/resources/my/lib",
 				"src": "**/*.*"
 			}
 		}
@@ -34,7 +34,7 @@
 				"calc_appindex": true
 			},
 			"resources": {
-				"cwd": "<%= dir.dist %>/resources",
+				"cwd": "<%= dir.dist %>/resources/my/lib",
 				"src": "**/*.*"
 			}
 		}
