@@ -288,7 +288,7 @@ module.exports = function(grunt) {
 					archive: "<%= dir.dist %>/nabi-m.zip"
 				},
 				expand: true,
-				cwd: "<%= dir.dist %>/resources",
+				cwd: "<%= dir.dist %>/resources/nabi/m",
 				src: ["**/*"],
 				dot : true,
 				dest: "/"
