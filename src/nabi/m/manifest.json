@@ -12,7 +12,7 @@
 		"openSourceComponents": [
 			{
 				"name": "PDF.js",
-				"version" : "1.8.188",
+				"version" : "1.9.426",
 				"url": "https://mozilla.github.io/pdf.js/",
 				"packagedWithMySelf": true
 			}, {
