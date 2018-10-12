@@ -15,6 +15,14 @@ module.exports = function(grunt) {
 	// read sap deployment config file (only needed for sap nw abap deployment)
 	const SAPDEPLOY_FILE_PATH = nabiFinalCfg.sapdeploy.configFile;
 	let sapDeployConfig = grunt.file.exists(SAPDEPLOY_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOY_FILE_PATH) : {};
+	//TODO loop over systems and set password:
+	// read NPL credentials from env for jenkins deployment (will be overridden by credentials file below)
+    if (process.env.SAPDEPLOY_CREDENTIALS_USR && process.env.SAPDEPLOY_CREDENTIALS_PSW && process.env.SAPDEPLOY_SAP_SYSTEM){
+        sapDeployConfig[process.env.SAPDEPLOY_SAP_SYSTEM].options.auth = {
+            user: process.env.SAPDEPLOY_CREDENTIALS_USR,
+            pwd: process.env.SAPDEPLOY_CREDENTIALS_PSW
+        };
+    }
 	// read + merge credentials file for sap nw abap deployment
 	const SAPDEPLOYUSER_FILE_PATH = nabiFinalCfg.sapdeploy.credentialsFile;
 	const oCredentials = grunt.file.exists(SAPDEPLOYUSER_FILE_PATH) ? grunt.file.readJSON(SAPDEPLOYUSER_FILE_PATH) : {};
