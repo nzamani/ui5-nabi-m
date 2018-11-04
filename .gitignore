@@ -6,6 +6,7 @@ tmp
 jsdoc
 
 # thirdparty libs via package.json dependencies + copied to src/nabi/m/thirdparty/* via postInstall.js
+src/nabi/m/thirdparty/blueimp-canvas-to-blob
 src/nabi/m/thirdparty/pdfjs-dist
 
 # user project config
