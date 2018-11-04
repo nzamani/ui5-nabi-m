@@ -1,0 +1,19 @@
+<mvc:View
+	controllerName="test.nabi.m.samplecomp.allinone.controller.PDFViewer"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:nabi="nabi.m"
+	height="100%">
+	<Page
+		title="nabi.m.PDFViewer"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+		<content>
+			<!-- in real apps you would get the PDF from somewhere else -->
+			<nabi:PDFViewer
+				id="myPdfViewerShowingTheOpenUI5Logo"
+				source="allinone/static/OpenUI5.pdf"/>
+		</content>
+	</Page>
+</mvc:View>

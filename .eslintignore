@@ -2,3 +2,7 @@
 # Details: http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories
 
 src/nabi/m/thirdparty
+target
+dist
+build
+jsdoc

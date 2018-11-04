@@ -1,6 +1,11 @@
 {
 	"env": {
-		"browser": true
+		"browser": true,
+		"es6": true
+	},
+	"extends" : "eslint:recommended",
+	"parserOptions": {
+		"sourceType": "script"
 	},
 	"globals": {
 		"sap": true,

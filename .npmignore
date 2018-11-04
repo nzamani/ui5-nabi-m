@@ -7,8 +7,13 @@ demoapp
 docs
 defaults
 dist/nabi-m.zip
+build
+jsdoc
+lib
 .idea
+.babelrc
 .editorconfig
 .eslintrc
 .nabi.json
 .user.nabi.json
+Jenkinsfile

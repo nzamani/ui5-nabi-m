@@ -5,7 +5,7 @@
 		"type": "library",
 		"embeds":[],
 		"applicationVersion":{
-			"version":"0.3.0"
+			"version":"0.4.0"
 		 },
 		"title":"Nabi Mobile Controls",
 		"description":"Nabi Mobile Controls by nabisoft",

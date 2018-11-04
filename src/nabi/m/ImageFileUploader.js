@@ -8,7 +8,7 @@ sap.ui.define([
 	"sap/ui/unified/FileUploader",
 	"sap/ui/unified/FileUploaderRenderer",
 	"sap/ui/Device",
-	"nabi/m/thirdparty/canvas-to-blob",
+	"nabi/m/thirdparty/blueimp-canvas-to-blob/js/canvas-to-blob"
 ], function(jQuery, library, FileUploader, FileUploaderRenderer, Device, canvasToBlob) {
 	"use strict";
 
@@ -77,7 +77,7 @@ sap.ui.define([
 				 * <li><code>nabi.m.ImageScaleCondition.None</code>: Always scale image meaning without checking any condition <b>(default)</b>.</li>
 				 * </ul>
  				 */
-				scaleCondition : {type : "nabi.m.ImageScaleCondition", group : "Data", defaultValue : nabi.m.ImageScaleCondition.None},
+				scaleCondition : {type : "nabi.m.ImageScaleCondition", group : "Data", defaultValue : library.ImageScaleCondition.None},
 
 				/**
 				 * The max allowed initial file size in bytes used for the condition <code>nabi.m.ImageScaleCondition.Size</code>.
@@ -121,7 +121,7 @@ sap.ui.define([
 				 *
 				 * <b>Hint:</b> Technically, scaling up might be possible. However, scaling up images was not tested as it was never a goal for this control.
 				 */
-				scaleType : {type : "nabi.m.ImageScaleType", group : "Data", defaultValue : nabi.m.ImageScaleType.Factor},
+				scaleType : {type : "nabi.m.ImageScaleType", group : "Data", defaultValue : library.ImageScaleType.Factor},
 
 				/**
 				 * The scale factor which is applied to the selected file before it gets uploaded.
@@ -169,7 +169,7 @@ sap.ui.define([
 				 * The default is to use the original image file type (no conversion applied before upload).
 				 * Internally, the image file type conversion happens after the image got scaled.
 				 */
-				uploadType : {type : "nabi.m.ImageType", group : "Data", defaultValue : nabi.m.ImageType.Default}
+				uploadType : {type : "nabi.m.ImageType", group : "Data", defaultValue : library.ImageType.Default}
 
 			},
 			aggregations : { },
@@ -446,19 +446,19 @@ sap.ui.define([
 		sScaleCondition = this.getScaleCondition();
 
 		switch (sScaleCondition) {
-			case nabi.m.ImageScaleCondition.Size:
+			case library.ImageScaleCondition.Size:
 				fnResult = this._scaleConditionSizeMatched;
 				break;
-			case nabi.m.ImageScaleCondition.Resolution:
+			case library.ImageScaleCondition.Resolution:
 				fnResult = this._scaleConditionResolutionMatched;
 				break;
-			case nabi.m.ImageScaleCondition.Boundary:
+			case library.ImageScaleCondition.Boundary:
 				fnResult = this._scaleConditionBoundaryMatched;
 				break;
-			case nabi.m.ImageScaleCondition.Any:
+			case library.ImageScaleCondition.Any:
 				fnResult = this._scaleConditionAnyPassed;
 				break;
-			case nabi.m.ImageScaleCondition.None:
+			case library.ImageScaleCondition.None:
 		  default:
 				fnResult = this._scaleConditionNoneMatched;
 		}
@@ -523,7 +523,7 @@ sap.ui.define([
 	ImageFileUploader.prototype._scaleConditionAnyPassed = function (oParams){
 		return this._scaleConditionSizeMatched(oParams) ||
 					 this._scaleConditionResolutionMatched(oParams) ||
-					 this._scaleConditionBoundaryMatched(ooParams);
+					 this._scaleConditionBoundaryMatched(oParams);
 	};
 
 	/**
@@ -602,12 +602,12 @@ sap.ui.define([
 
 				canvas = document.createElement("canvas");
 				scaleType	= this.getScaleType();
-				if (scaleType === nabi.m.ImageScaleType.Factor) {
+				if (scaleType === library.ImageScaleType.Factor) {
 					fFactor = this.getScaleFactor();
 					canvas.width = oImage.width * fFactor;
 					canvas.height = oImage.height * fFactor;
 
-				} else if (scaleType === nabi.m.ImageScaleType.Boundary) {
+				} else if (scaleType === library.ImageScaleType.Boundary) {
 					oBoundary = this._calculateBoundaries(oImage);
 					canvas.width = oBoundary.width;
 					canvas.height = oBoundary.height;
@@ -643,7 +643,7 @@ sap.ui.define([
 			width: oImage.width
 		};
 
-		if (this.getScaleType() !== nabi.m.ImageScaleType.Boundary){
+		if (this.getScaleType() !== library.ImageScaleType.Boundary){
 				throw new Error("ImageFileUploader: boundaries can only be calculated for nabi.m.ImageScaleType.Boundary, but received nabi.m.ImageScaleType." + this.getScaleType());
 		}
 
@@ -684,16 +684,16 @@ sap.ui.define([
 
 		sExtension = oFile.name.substr(oFile.name.lastIndexOf('.') + 1).toLowerCase();
 		sUploadType = this.getUploadType();
-		if (sUploadType === nabi.m.ImageType.Default) {
+		if (sUploadType === library.ImageType.Default) {
 			return oProperties;
 
-		} else if (sUploadType === nabi.m.ImageType.png){
+		} else if (sUploadType === library.ImageType.png){
 			oProperties.filename = sExtension === "png" ? oProperties.filename : oProperties.filename + ".png";
-			oProperties.mimetype = nabi.m.MimeType.PNG;
+			oProperties.mimetype = library.MimeType.PNG;
 
-		} else if (sUploadType === nabi.m.ImageType.jpg){
+		} else if (sUploadType === library.ImageType.jpg){
 			oProperties.filename = sExtension === "jpg" ? oProperties.filename : oProperties.filename + ".jpg";
-			oProperties.mimetype = nabi.m.MimeType.JPEG;
+			oProperties.mimetype = library.MimeType.JPEG;
 			oProperties.quality = this.getScaledJpgQuality();
 		}
 		return oProperties;
@@ -712,12 +712,12 @@ sap.ui.define([
 	    var fi = document.createElement('INPUT');
 	    fi.type = 'file';
 	    return window.File && 'files' in fi;
-	  };
+	  }
 
 	  function checkAjaxUploadProgressEvents() {
 	    var xhr = new XMLHttpRequest();
 	    return !!(xhr && ('upload' in xhr) && ('onprogress' in xhr.upload));
-	  };
+	  }
 
 	  function checkFormData() {
 	    return !!window.FormData;

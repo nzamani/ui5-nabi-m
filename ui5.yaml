@@ -1,0 +1,9 @@
+---
+specVersion: "0.1"
+type: library
+metadata:
+  name: nabi.m
+  copyright: |-
+   An OpenUI5 library.
+    * (c) Copyright 2009-${currentYear} nabisoft GmbH or a nabisoft affiliate company.
+    * Licensed under the Apache License, Version 2.0 - see LICENSE.txt.

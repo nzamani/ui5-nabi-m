@@ -1,6 +1,12 @@
 # build artefacts
 build
 dist
+target
+tmp
+jsdoc
+
+# thirdparty libs via package.json dependencies + copied to src/nabi/m/thirdparty/* via postInstall.js
+src/nabi/m/thirdparty/pdfjs-dist
 
 # user project config
 .user.nabi.json

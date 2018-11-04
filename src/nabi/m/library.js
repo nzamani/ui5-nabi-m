@@ -5,20 +5,9 @@
 /**
  * Initialization code and shared classes of library nabi.m.
  */
-sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
+sap.ui.define(["jquery.sap.global", "sap/ui/core/library"],
 	function(jQuery, library) {
 	"use strict";
-
-
-	/**
-	 * A library containing mobile controls
-	 *
-	 * @namespace
-	 * @name nabi.m
-	 * @public
-	 */
-
-	// library dependencies
 
 	// delegate further initialization of this library to the Core
 	sap.ui.getCore().initLibrary({
@@ -32,8 +21,21 @@ sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
 		],
 		elements: [],
 		noLibraryCSS: false,
-		version: "0.3.0"
+		version: "0.4.0"
 	});
+
+	/* eslint-disable no-undef */
+	/**
+	 * A library containing mobile controls.
+	 *
+	 * @namespace
+	 * @alias nabi.m
+	 * @author Nabi Zamani, nabisoft GmbH
+	 * @version "0.4.0"
+	 * @public
+	 */
+	var thisLib = nabi.m;
+	/* eslint-enable no-undef */
 
 	/**
 	 * Image Types.
@@ -41,7 +43,7 @@ sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
 	 * @enum {string}
 	 * @public
 	 */
-	nabi.m.ImageType = {
+	thisLib.ImageType = {
 
 		/**
 		 * Image Type JPEG which corresponds to mime image/jpeg.
@@ -69,7 +71,7 @@ sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
 	 * @enum {string}
 	 * @public
 	 */
-	nabi.m.ImageScaleType = {
+	thisLib.ImageScaleType = {
 
 		/**
 		 * Scaling by factor.
@@ -91,7 +93,7 @@ sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
 	 * @enum {string}
 	 * @public
 	 */
-	nabi.m.ImageScaleCondition = {
+	thisLib.ImageScaleCondition = {
 
 		/**
 		 * Scale only if size of initial file is exceeded.
@@ -134,7 +136,7 @@ sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
 	 * @enum {string}
 	 * @public
 	 */
-	nabi.m.MimeType = {
+	thisLib.MimeType = {
 
 		/**
 		 * Scaling by factor.
@@ -156,6 +158,6 @@ sap.ui.define(['jquery.sap.global', 'sap/ui/core/library'],
 
 	};
 
-	return nabi.m;
+	return thisLib;
 
 });

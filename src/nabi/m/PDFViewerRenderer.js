@@ -31,7 +31,7 @@ sap.ui.define([
 			oRm.addClass("nabiMPDFViewer");
 			oRm.writeClasses();
 
-			oRm.writeAttribute("src", sViewerPath + "?file=" + oControl.getSource());
+			oRm.writeAttribute("src", sViewerPath + "?file=" + encodeURIComponent(oControl.getSource()) );
 			oRm.writeAttribute("height", oControl.getHeight());
 			oRm.writeAttribute("width", oControl.getWidth());
 

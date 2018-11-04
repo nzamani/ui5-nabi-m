@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="utf-8">
+
+		<title>TestSuite for nabi.m</title>
+
+		<script src="../../../resources/sap/ui/qunit/qunit-redirect.js"></script>
+	</head>
+	<body>
+		<script>
+
+			/**
+			 * Add test pages to this test suite function.
+			 */
+			function suite() {
+				var oSuite = new parent.jsUnitTestSuite(),
+					sContextPath = "/" + window.location.pathname.split("/")[1];
+
+				oSuite.addTestPage(sContextPath + "/test-resources/nabi/m/unit/unitTests.qunit.html");
+				oSuite.addTestPage(sContextPath + "/test-resources/nabi/m/integration/opaTests.qunit.html");
+
+				return oSuite;
+			}
+
+		</script>
+	</body>
+</html>
