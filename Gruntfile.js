@@ -7,8 +7,8 @@ module.exports = function(grunt) {
 
 	const nabiProject = require("./lib/nabiProject");
 
-	let sapDeployConfig = nabiProject.readConfig();
-	//grunt.log.writeln("\n### nabi config ###\n" + JSON.stringify(sapDeployConfig, null, 2));
+	const CONFIG = nabiProject.readConfig();
+	//grunt.log.writeln("\n### nabi config ###\n" + JSON.stringify(CONFIG.sapDeploy, null, 2));
 
 	grunt.initConfig({
 
@@ -250,7 +250,7 @@ module.exports = function(grunt) {
 						"<%= dir.nodeModules %>/@openui5/sap.ui.layout/src",
 						"<%= dir.nodeModules %>/@openui5/sap.ui.unified/src",
 						"<%= dir.nodeModules %>/@openui5/themelib_sap_belize/src",
-						// the oerder of these two is important because contents from buildBabel shall be preferred over src
+						// the order of these two is important because contents from buildBabel shall be preferred over src
 						"<%= dir.buildBabel %>",
 						"<%= dir.src %>"
 					],
@@ -332,7 +332,7 @@ module.exports = function(grunt) {
 		copy: {
 			srcToDist: {
 				files: [
-					{	// first all resources incl. themes, thirdparty and even less files (won"t harm)
+					{	// first all resources incl. themes, thirdparty and even less files (won't harm)
 						expand: true,
 						src: [ "**", "nabi/m/.library" ],
 						cwd: "<%= dir.src %>",
@@ -400,7 +400,7 @@ module.exports = function(grunt) {
 			}
 		},
 
-		nwabap_ui5uploader: sapDeployConfig
+		nwabap_ui5uploader: CONFIG.sapDeploy
 
 	});
 

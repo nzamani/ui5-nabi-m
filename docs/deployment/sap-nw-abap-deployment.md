@@ -2,7 +2,7 @@
 
 ## Before Deployment
 
-1. Install all npm dependencies (also installs all bower dependencies)
+1. Install all npm dependencies
     ```sh
     npm install
     ```
@@ -137,7 +137,7 @@
         ```
 
 	**Hint:** Make sure not to show this file to anyone. It's ouside of the project to avoid it gets checked in accidentally. 
-	The credentials in this file are used for the sap deployment task (sapdeploy), see below for details. `upload_build_abap_750` and `upload_build_abap_750` are placeholders and they correspond to the configuration of the sapdeploy task (see file `.sapdeploy.json` in project root).
+	The credentials in this file are used for the sap deployment task (sapdeploy), see below for details. `upload_build_abap_740` and `upload_build_abap_750` are placeholders and they correspond to the configuration of the sapdeploy task (see file `.sapdeploy.json` in project root).
 
 
 

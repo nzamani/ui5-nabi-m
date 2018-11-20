@@ -1,12 +1,16 @@
 # ui5-nabi-m
 
-UI5 Nabi Mobile - a few things we would love to share with the community.
+> UI5 Nabi Mobile - a few things we would love to share with the community.
+
+## Version Info
+* SAPUI5: 1.56.11
+* NodeJs: 10.13.0
 
 [![NPM](https://nodei.co/npm/ui5-nabi-m.png?compact=true)](https://npmjs.org/package/ui5-nabi-m)
 
 ## Getting started
 
-1. Install [node.js](http://nodejs.org/) (make sure to choose the LTS version, i.e. v6.11.2 LTS)
+1. Install [node.js](http://nodejs.org/) (**IMPORTANT:** choose latest LTS version, i.e. 10.13.0 LTS)
 
 1. Install [git](https://git-scm.com/) if you haven't
 
@@ -19,6 +23,17 @@ UI5 Nabi Mobile - a few things we would love to share with the community.
     NO_PROXY=localhost,127.0.0.1,.mycompany.corp
     ```
 
+    **Hint:** See [Proxy Settings](docs/ProxySettings.md) for additional details.
+
+1. Configure your [Local Development Environment](docs/LocalDevEnvironment.md)
+
+1. Install grunt-cli and eslint globally one by one or at once
+    * One by one
+        * `npm install -g grunt-cli`
+        * `npm install -g eslint`
+    * or together at once
+        * `npm install -g grunt-cli eslint`
+
 1. Clone the repository and navigate into it
 
     ```sh
@@ -26,7 +41,7 @@ UI5 Nabi Mobile - a few things we would love to share with the community.
     cd ui5-nabi-m
     ```
 
-1. Install all npm dependencies (also installs all bower dependencies)
+1. Install all npm dependencies
 
     ```sh
     npm install --ignore-scripts
